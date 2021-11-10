@@ -4,6 +4,8 @@
  */
 package com.CUATRIMOTO.Cuatrimoto;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +36,23 @@ public class RepositorioReservation {
     public void delete(Reservation reservation){
         crud4.delete(reservation);
     }
+    
+    public List<ContadorClient> getClientesRepositorio(){
+        List<ContadorClient> res = new ArrayList<>();
+        List<Object[]> report = crud4.countTotalReservationsByClient();
+        for(int i=0; i<report.size(); i++){
+          res.add(new ContadorClient((long) report.get(i)[1],(Client) report.get(i)[0]));  
+          
+        }
+        return res;
+    }
+
+    List<Reservation> ReservacionTiempoRepositorio(Date datoUno, Date datoDos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    List<Reservation> ReservacionStatusRepositorio(String cancelled) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
